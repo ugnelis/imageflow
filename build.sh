@@ -240,19 +240,15 @@ echo_maybe "============================= [build.sh] ===========================
 if test -n "$AWS_ACCESS_KEY_ID" -a -n "$AWS_SECRET_ACCESS_KEY" -a -n "$SCCACHE_BUCKET"; then
 	export PATH=$HOME/.cargo/bin:$PATH
 	if ! command -v sccache > /dev/null; then
-		if command -v brew > /dev/null; then
-			brew install sccache
-		else
-			PKG_CONFIG_ALL_STATIC=1 cargo install --force sccache --features=s3
-		fi
-	fi
-	SCCACHE_BIN=$(command -v sccache)
-
-	if "$SCCACHE_BIN" --start-server; then
-		export RUSTC_WRAPPER=$SCCACHE_BIN
-		echo_maybe "Using S3 sccache for $(uname -ms)"
+		echo_maybe "S3 sccache not cached; installing for the next run"
+		PKG_CONFIG_ALL_STATIC=1 cargo install --force sccache --features=s3 &
 	else
-		echo_maybe "warning: Failed to set up S3 sccache for $(uname -ms)"
+		if "$SCCACHE_BIN" --start-server; then
+			export RUSTC_WRAPPER=$SCCACHE_BIN
+			echo_maybe "Using S3 sccache for $(uname -ms)"
+		else
+			echo_maybe "warning: Failed to set up S3 sccache for $(uname -ms)"
+		fi
 	fi
 else
 	echo_maybe "AWS bucket for sccache not set up (AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID + AWS_SECRET_ACCESS_KEY + SCCACHE_BUCKET=$SCCACHE_BUCKET)"
