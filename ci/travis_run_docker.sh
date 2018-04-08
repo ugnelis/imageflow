@@ -7,8 +7,6 @@ printf "travis_run_docker.sh:"
 sudo chown -R "$(id -u -n)": ~/
 sudo chmod -R a+rw .
 
-ls -laR "${HOME}/host_cargo/" "${HOME}/.cargo/"
-
 if [[ -d "${HOME}/host_cargo/git" && -d "${HOME}/host_cargo/registry" ]]; then
 	echo "importing host_cargo"
   cp -Rp "${HOME}/host_cargo/git" "${HOME}/.cargo/git"
