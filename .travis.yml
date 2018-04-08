@@ -46,7 +46,7 @@ install:
 script:
 - ci/travis_run.sh
 before_cache:
-  - ls -lad "$HOME/.cargo/* $HOME/
+  - ls -lad $HOME/.cargo/* $HOME/
   - test -d $HOME/.cargo/registry/src && mv $HOME/.cargo/registry/src $HOME/_forgetme1
   - test -d $HOME/.cargo/git/checkouts && mv $HOME/.cargo/git/checkouts $HOME/_forgetme2
 before_deploy:
