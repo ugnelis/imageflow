@@ -46,7 +46,8 @@ install:
 script:
 - ci/travis_run.sh
 before_cache:
-  - rm -rf $HOME/.cargo/registry/src
+  - test -d $HOME/.cargo/registry/src && mv $HOME/.cargo/registry/src $HOME/_forgetme1
+  - test -d $HOME/.cargo/git/checkouts && mv $HOME/.cargo/git/checkouts $HOME/_forgetme2
 before_deploy:
   - export GITHUB_FILES="$(ls artifacts/upload/releases/v*/imageflow-v*.tar.gz)"
   - echo "Planning to upload ${GITHUB_FILES} to GitHub"
