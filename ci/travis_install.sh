@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e #Exit on failure.
+set -xe #Exit on failure.
 
 STAMP="+[%H:%M:%S]"
 date "$STAMP"

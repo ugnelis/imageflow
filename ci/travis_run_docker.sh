@@ -1,11 +1,13 @@
 #!/bin/bash
-set -e #Exit on failure.
+set -ex #Exit on failure.
 printf "travis_run_docker.sh:"
 
 # Take ownership of the home directory
 # Otherwise docker folder mapping can fuck things up
 sudo chown -R "$(id -u -n)": ~/
 sudo chmod -R a+rw .
+
+ls -laR "${HOME}/host_cargo/" "${HOME}/.cargo/"
 
 if [[ -d "${HOME}/host_cargo/git" && -d "${HOME}/host_cargo/registry" ]]; then
 	echo "importing host_cargo"

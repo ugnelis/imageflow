@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 #echo "SIM_DOCKER_CACHE_VARS ${SIM_DOCKER_CACHE_VARS[*]}"
 # shellcheck disable=SC2116
 # shellcheck disable=SC2086

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e #Exit on failure.
+set -ex #Exit on failure.
 
 # Change directory to root (call this in a subshell if you have a problem with that)
 cd "$( dirname "${BASH_SOURCE[0]}" )"
